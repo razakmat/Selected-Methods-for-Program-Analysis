@@ -1,0 +1,5 @@
+../examples/err-record2.uc:[6:21]: execution error: Non-existing field (c) access in {a:1,b:2}
+      output (*(*n).c).c; // error: missing field
+                      ^
+
+1

@@ -1,0 +1,5 @@
+../examples/err-doubledecl1.uc:[3:7]: semantic error: identifier 'q' already declared (2:11)
+    var q; // error: identifier already declared
+        ^
+
+1

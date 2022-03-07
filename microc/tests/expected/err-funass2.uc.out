@@ -1,0 +1,5 @@
+../examples/err-funass2.uc:[4:9]: semantic error: cannot take an address of a function
+      f = &main; // error: taking address of a function
+          ^
+
+1

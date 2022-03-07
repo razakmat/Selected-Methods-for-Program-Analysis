@@ -1,0 +1,8 @@
+#!/bin/sh
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
+REPO_DIR=$(cd $SCRIPT_DIR && git rev-parse --show-toplevel)
+
+IMAGE="fikovnik/microc"
+
+docker run -i --rm -v "$REPO_DIR:$REPO_DIR" -w "$REPO_DIR" "$IMAGE" "$@"

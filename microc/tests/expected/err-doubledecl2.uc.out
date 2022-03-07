@@ -1,0 +1,5 @@
+../examples/err-doubledecl2.uc:[2:7]: semantic error: identifier 'x' already declared (1:3)
+    var x, z; // error: identifier already declared
+        ^
+
+1
