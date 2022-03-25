@@ -12,6 +12,10 @@ SemanticAnalysis::SemanticAnalysis()
 {
 }
 
+set<string> & SemanticAnalysis::GetAllFields()
+{
+    return m_allFields;
+}
 
 Object * SemanticAnalysis::visit ( Number * integer)
 {
@@ -67,7 +71,7 @@ Object * SemanticAnalysis::visit ( CallFuncExpr * call)
             throw SemanticException("Error : Wrong number of arguments in call of function \"" + 
                                       id->m_name + "\".",id->m_loc);
     }
-    for (uint i = 0; i < call->m_arg.size(); i++)
+    for (uint16_t i = 0; i < call->m_arg.size(); i++)
     {
         call->m_arg[i]->Accept(*this);
     }
@@ -112,8 +116,9 @@ Object * SemanticAnalysis::visit ( RecordField * recordField)
 Object * SemanticAnalysis::visit ( Record * record)
 {
     set<string> fiel; 
-    for (uint i = 0; i < record->m_fields.size(); i++)
+    for (uint16_t i = 0; i < record->m_fields.size(); i++)
     {
+        m_allFields.insert(record->m_fields[i]->m_name);
         auto it = fiel.insert(record->m_fields[i]->m_name);
         if (!it.second)
             throw SemanticException("Error : Duplicate field name \"" + 
@@ -124,6 +129,7 @@ Object * SemanticAnalysis::visit ( Record * record)
 }
 Object * SemanticAnalysis::visit ( FieldAccess * fieldAccess)
 {
+    m_allFields.insert(fieldAccess->m_field);
     return nullptr;
 }
 Object * SemanticAnalysis::visit ( AssignStmt * assignStmt)
@@ -150,7 +156,7 @@ Object * SemanticAnalysis::visit ( AssignStmt * assignStmt)
 
 Object * SemanticAnalysis::visit ( NestedBlockStmt * nestedBlockStmt)
 {
-    for (uint i = 0; i < nestedBlockStmt->m_body.size(); i++)
+    for (uint16_t i = 0; i < nestedBlockStmt->m_body.size(); i++)
     {
         nestedBlockStmt->m_body[i]->Accept(*this);
     }
@@ -162,7 +168,7 @@ Object * SemanticAnalysis::visit ( IdentifierDecl * idDecl)
 }
 Object * SemanticAnalysis::visit ( VarStmt * varStmt)
 {
-    for (uint i = 0; i < varStmt->m_decls.size(); i++)
+    for (uint16_t i = 0; i < varStmt->m_decls.size(); i++)
     {
         auto it = m_var.insert({varStmt->m_decls[i]->m_name,varStmt->m_decls[i]});
         if (!it.second)
@@ -182,11 +188,11 @@ Object * SemanticAnalysis::visit ( ReturnStmt * returnStmt)
 }
 Object * SemanticAnalysis::visit ( FunBlockStmt * funBlockStmt)
 {
-    for (uint i = 0; i < funBlockStmt->m_vars.size(); i++)
+    for (uint16_t i = 0; i < funBlockStmt->m_vars.size(); i++)
     {
         funBlockStmt->m_vars[i]->Accept(*this);
     }
-    for (uint i = 0; i < funBlockStmt->m_stmts.size(); i++)
+    for (uint16_t i = 0; i < funBlockStmt->m_stmts.size(); i++)
     {
         funBlockStmt->m_stmts[i]->Accept(*this);
     }
@@ -214,7 +220,7 @@ Object * SemanticAnalysis::visit ( OutputStmt * output)
 }
 Object * SemanticAnalysis::visit ( FunDecl * funDecl)
 {
-    for (uint i = 0; i < funDecl->m_params.size(); i++)
+    for (uint16_t i = 0; i < funDecl->m_params.size(); i++)
     {
         auto it = m_var.insert({funDecl->m_params[i]->m_name,funDecl->m_params[i]});
         if (!it.second)
@@ -232,7 +238,7 @@ Object * SemanticAnalysis::visit ( FunDecl * funDecl)
 }
 Object * SemanticAnalysis::visit ( Program * Program)
 {
-    for (uint i = 0; i < Program->m_funs.size(); i++)
+    for (uint16_t i = 0; i < Program->m_funs.size(); i++)
     {
         auto it = m_fun.insert({Program->m_funs[i]->m_name,Program->m_funs[i]});
         if (!it.second)
@@ -240,7 +246,7 @@ Object * SemanticAnalysis::visit ( Program * Program)
                                     Program->m_funs[i]->m_name + "\".",Program->m_funs[i]->m_loc);
     }
 
-    for (uint i = 0; i < Program->m_funs.size(); i++)
+    for (uint16_t i = 0; i < Program->m_funs.size(); i++)
     {
         Program->m_funs[i]->Accept(*this);
     }

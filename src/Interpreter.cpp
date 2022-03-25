@@ -62,13 +62,13 @@ Object * Interpreter::visit ( CallFuncExpr * call)
     FunDecl * fun = objfun->m_fun;
 
     vector<Object*> args;
-    for (uint i = 0; i < call->m_arg.size(); i++)
+    for (uint16_t i = 0; i < call->m_arg.size(); i++)
     {
         args.push_back(call->m_arg[i]->Accept(*this));
     }
     m_memory.PushStack();
 
-    for (uint i = 0; i < fun->m_params.size(); i++)
+    for (uint16_t i = 0; i < fun->m_params.size(); i++)
     {
         m_memory.CreateVar(fun->m_params[i]->m_name,args[i]);
     }
@@ -132,7 +132,7 @@ Object * Interpreter::visit ( Record * record)
 {
     vector<pair<string,Object*>> fies;
 
-    for (uint i = 0; i < record->m_fields.size(); i++)
+    for (uint16_t i = 0; i < record->m_fields.size(); i++)
     {
         Object * field = record->m_fields[i]->Accept(*this);
         if (typeid(*field) == typeid(ObjRec))
@@ -188,7 +188,7 @@ Object * Interpreter::visit ( AssignStmt * assignStmt)
 
 Object * Interpreter::visit ( NestedBlockStmt * nestedBlockStmt)
 {
-    for (uint i = 0; i < nestedBlockStmt->m_body.size(); i++)
+    for (uint16_t i = 0; i < nestedBlockStmt->m_body.size(); i++)
     {
         nestedBlockStmt->m_body[i]->Accept(*this);
     }
@@ -203,7 +203,7 @@ Object * Interpreter::visit ( IdentifierDecl * idDecl)
 
 Object * Interpreter::visit ( VarStmt * varStmt)
 {
-    for (uint i = 0; i < varStmt->m_decls.size(); i++)
+    for (uint16_t i = 0; i < varStmt->m_decls.size(); i++)
     {
         varStmt->m_decls[i]->Accept(*this);
     }
@@ -217,11 +217,11 @@ Object * Interpreter::visit ( ReturnStmt * returnStmt)
 
 Object * Interpreter::visit ( FunBlockStmt * funBlockStmt)
 {
-    for (uint i = 0; i < funBlockStmt->m_vars.size(); i++)
+    for (uint16_t i = 0; i < funBlockStmt->m_vars.size(); i++)
     {
         funBlockStmt->m_vars[i]->Accept(*this);
     }
-    for (uint i = 0; i < funBlockStmt->m_stmts.size(); i++)
+    for (uint16_t i = 0; i < funBlockStmt->m_stmts.size(); i++)
     {
         funBlockStmt->m_stmts[i]->Accept(*this);
     }
@@ -275,7 +275,7 @@ Object * Interpreter::visit ( FunDecl * funDecl)
 Object * Interpreter::visit ( Program * Program)
 {
     FunDecl * top = nullptr;
-    for (uint i = 0; i < Program->m_funs.size(); i++)
+    for (uint16_t i = 0; i < Program->m_funs.size(); i++)
     {
         if(Program->m_funs[i]->m_name == "main")
             top = Program->m_funs[i];

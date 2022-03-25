@@ -86,7 +86,7 @@ void Env::CreateVar(const string & name,Object * arg)
 ObjRec * Env::CreateRecord(vector<pair<string,Object*>> & fields)
 {
     Stack * now = new Stack();
-    for (uint i = 0; i < fields.size(); i++)
+    for (uint16_t i = 0; i < fields.size(); i++)
     {
         now->m_ref.insert({fields[i].first,m_heap->GetCurrent()});
         m_heap->AssignToHeap(fields[i].second);

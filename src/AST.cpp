@@ -1,6 +1,7 @@
 #include "AST.h"
 #include "Visitor.h"
 #include "Memory.h"
+#include "VisitorType.h"
 #include <iostream>
 
 using namespace std;
@@ -41,6 +42,11 @@ Identifier::~Identifier()
 {
 }
 
+shared_ptr<Type> Identifier::Accept(VisitorType & v)
+{
+    return v.visit(this);
+}
+
 Object * Identifier::Accept(Visitor & v)
 {
     return v.visit(this);
@@ -55,6 +61,11 @@ Number::~Number()
 {
 }
 
+shared_ptr<Type> Number::Accept(VisitorType & v)
+{
+    return v.visit(this);
+}
+
 Object * Number::Accept(Visitor & v)
 {
     return v.visit(this);
@@ -67,6 +78,11 @@ Null::Null(const Loc & loc)
 
 Null::~Null()
 {
+}
+
+shared_ptr<Type> Null::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * Null::Accept(Visitor & v)
@@ -84,6 +100,11 @@ BinaryOp::~BinaryOp()
 {
     delete m_left;
     delete m_right;
+}
+
+shared_ptr<Type> BinaryOp::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * BinaryOp::Accept(Visitor & v)
@@ -131,9 +152,14 @@ CallFuncExpr::CallFuncExpr(Expr * targetFun, const vector<Expr*> arg, const Loc 
 
 CallFuncExpr::~CallFuncExpr()
 {
-    for (uint i = 0; i < m_arg.size(); i++)
+    for (uint16_t i = 0; i < m_arg.size(); i++)
         delete m_arg[i];
     delete m_targetFun;
+}
+
+shared_ptr<Type> CallFuncExpr::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * CallFuncExpr::Accept(Visitor & v)
@@ -148,6 +174,11 @@ Input::Input(const Loc & loc)
 
 Input::~Input()
 {
+}
+
+shared_ptr<Type> Input::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * Input::Accept(Visitor & v)
@@ -165,6 +196,11 @@ Alloc::~Alloc()
     delete m_expr;
 }
 
+shared_ptr<Type> Alloc::Accept(VisitorType & v)
+{
+    return v.visit(this);
+}
+
 Object * Alloc::Accept(Visitor & v)
 {
     return v.visit(this);
@@ -178,6 +214,11 @@ VarRef::VarRef(Identifier * id, const Loc & loc)
 VarRef::~VarRef()
 {
     delete m_id;
+}
+
+shared_ptr<Type> VarRef::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * VarRef::Accept(Visitor & v)
@@ -195,6 +236,11 @@ Deref::~Deref()
     delete m_pointer;
 }
 
+shared_ptr<Type> Deref::Accept(VisitorType & v)
+{
+    return v.visit(this);
+}
+
 Object * Deref::Accept(Visitor & v)
 {
     return v.visit(this);
@@ -210,6 +256,11 @@ RecordField::~RecordField()
     delete m_expr;
 }
 
+shared_ptr<Type> RecordField::Accept(VisitorType & v)
+{
+    return v.visit(this);
+}
+
 Object * RecordField::Accept(Visitor & v)
 {
     return v.visit(this);
@@ -222,8 +273,13 @@ Record::Record(const vector<RecordField*> & fields,const Loc & loc)
 
 Record::~Record()
 {
-    for (uint i = 0; i < m_fields.size(); i++)
+    for (uint16_t i = 0; i < m_fields.size(); i++)
         delete m_fields[i];
+}
+
+shared_ptr<Type> Record::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * Record::Accept(Visitor & v)
@@ -242,6 +298,11 @@ FieldAccess::~FieldAccess()
     delete m_record;
 }
 
+shared_ptr<Type> FieldAccess::Accept(VisitorType & v)
+{
+    return v.visit(this);
+}
+
 Object * FieldAccess::Accept(Visitor & v)
 {
     return v.visit(this);
@@ -256,6 +317,11 @@ AssignStmt::~AssignStmt()
 {
     delete m_left;
     delete m_right;
+}
+
+shared_ptr<Type> AssignStmt::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * AssignStmt::Accept(Visitor & v)
@@ -275,8 +341,13 @@ NestedBlockStmt::NestedBlockStmt(const vector<StmtInNestedBlock*> & body, const 
 
 NestedBlockStmt::~NestedBlockStmt()
 {
-    for (uint i = 0; i < m_body.size(); i++)
+    for (uint16_t i = 0; i < m_body.size(); i++)
         delete m_body[i];
+}
+
+shared_ptr<Type> NestedBlockStmt::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * NestedBlockStmt::Accept(Visitor & v)
@@ -293,6 +364,11 @@ IdentifierDecl::~IdentifierDecl()
 {
 }
 
+shared_ptr<Type> IdentifierDecl::Accept(VisitorType & v)
+{
+    return v.visit(this);
+}
+
 Object * IdentifierDecl::Accept(Visitor & v)
 {
     return v.visit(this);
@@ -305,8 +381,13 @@ VarStmt::VarStmt(const vector<IdentifierDecl*> & decls, const Loc & loc)
 
 VarStmt::~VarStmt()
 {
-    for (uint i = 0; i < m_decls.size(); i++)
+    for (uint16_t i = 0; i < m_decls.size(); i++)
         delete m_decls[i];
+}
+
+shared_ptr<Type> VarStmt::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * VarStmt::Accept(Visitor & v)
@@ -324,6 +405,11 @@ ReturnStmt::~ReturnStmt()
     delete m_expr;
 }
 
+shared_ptr<Type> ReturnStmt::Accept(VisitorType & v)
+{
+    return v.visit(this);
+}
+
 Object * ReturnStmt::Accept(Visitor & v)
 {
     return v.visit(this);
@@ -338,11 +424,16 @@ FunBlockStmt::FunBlockStmt(const vector<VarStmt*> & vars,
 
 FunBlockStmt::~FunBlockStmt()
 {
-    for (uint i = 0; i < m_vars.size(); i++)
+    for (uint16_t i = 0; i < m_vars.size(); i++)
         delete m_vars[i];
-    for (uint i = 0; i < m_stmts.size(); i++)
+    for (uint16_t i = 0; i < m_stmts.size(); i++)
         delete m_stmts[i];
     delete m_ret;
+}
+
+shared_ptr<Type> FunBlockStmt::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * FunBlockStmt::Accept(Visitor & v)
@@ -363,6 +454,11 @@ IfStmt::~IfStmt()
     delete m_elseBranch;
 }
 
+shared_ptr<Type> IfStmt::Accept(VisitorType & v)
+{
+    return v.visit(this);
+}
+
 Object * IfStmt::Accept(Visitor & v)
 {
     return v.visit(this);
@@ -377,6 +473,11 @@ WhileStmt::~WhileStmt()
 {
     delete m_guard;
     delete m_block;
+}
+
+shared_ptr<Type> WhileStmt::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * WhileStmt::Accept(Visitor & v)
@@ -394,6 +495,11 @@ OutputStmt::~OutputStmt()
     delete m_expr;
 }
 
+shared_ptr<Type> OutputStmt::Accept(VisitorType & v)
+{
+    return v.visit(this);
+}
+
 Object * OutputStmt::Accept(Visitor & v)
 {
     return v.visit(this);
@@ -407,9 +513,14 @@ FunDecl::FunDecl(const vector<IdentifierDecl*> params, FunBlockStmt * block,
 
 FunDecl::~FunDecl()
 {
-    for (uint i = 0; i < m_params.size(); i++)
+    for (uint16_t i = 0; i < m_params.size(); i++)
         delete m_params[i];
     delete m_block;
+}
+
+shared_ptr<Type> FunDecl::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * FunDecl::Accept(Visitor & v)
@@ -424,8 +535,13 @@ Program::Program(vector<FunDecl*> & funs,const Loc & loc)
 
 Program::~Program()
 {
-    for (uint i = 0; i < m_funs.size(); i++)
+    for (uint16_t i = 0; i < m_funs.size(); i++)
         delete m_funs[i];
+}
+
+shared_ptr<Type> Program::Accept(VisitorType & v)
+{
+    return v.visit(this);
 }
 
 Object * Program::Accept(Visitor & v)

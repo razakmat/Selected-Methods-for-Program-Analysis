@@ -3,10 +3,13 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 using namespace std;
 
 class Visitor;
 class Object;
+class VisitorType;
+class Type;
 class Expr;
 
 struct Loc
@@ -59,6 +62,7 @@ public:
     ASTNode(const Loc & loc);
     virtual ~ASTNode() = default;
     virtual Object * Accept(Visitor & v) = 0;
+    virtual shared_ptr<Type> Accept(VisitorType & v) = 0;
     Loc m_loc;
 };
 
@@ -69,6 +73,7 @@ public:
     Expr(const Loc & loc);
     virtual ~Expr() = default;
     virtual Object * Accept(Visitor & v) = 0;
+    virtual shared_ptr<Type> Accept(VisitorType & v) = 0;
 };
 
 class Stmt : public ASTNode
@@ -77,6 +82,7 @@ public:
     Stmt(const Loc & loc);
     virtual ~Stmt() = default;
     virtual Object * Accept(Visitor & v) = 0;
+    virtual shared_ptr<Type> Accept(VisitorType & v) = 0;
 };
 
 class Decl : public ASTNode
@@ -85,6 +91,7 @@ public:
     Decl(const string & name, const Loc & loc);
     virtual ~Decl() = default;
     virtual Object * Accept(Visitor & v) = 0;
+    virtual shared_ptr<Type> Accept(VisitorType & v) = 0;
     string m_name;
 };
 
@@ -95,6 +102,7 @@ public:
     StmtInNestedBlock(const Loc & loc);
     virtual ~StmtInNestedBlock() = default;
     virtual  Object * Accept(Visitor & v) = 0;
+    virtual shared_ptr<Type> Accept(VisitorType & v) = 0;
 };
 
 class Null : public Expr
@@ -103,6 +111,7 @@ public:
     Null(const Loc & loc);
     ~Null();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
 };
 
 class Number : public Expr
@@ -111,6 +120,7 @@ public:
     Number(int value, const Loc & loc);
     ~Number();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     int m_value;
 };
 
@@ -120,6 +130,7 @@ public:
     Identifier(const string & name, const Loc & loc);
     ~Identifier();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     string m_name;
 };
 
@@ -129,6 +140,7 @@ public:
     BinaryOp(BinaryOperator * op, Expr * left, Expr * right,const Loc & loc);
     ~BinaryOp();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     BinaryOperator * m_operator;
     Expr * m_left;
     Expr * m_right;
@@ -140,6 +152,7 @@ public:
     CallFuncExpr(Expr * targetFun, const vector<Expr*> arg, const Loc & loc);
     ~CallFuncExpr();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     Expr * m_targetFun;
     vector<Expr*> m_arg;
 };
@@ -151,6 +164,7 @@ public:
     Input(const Loc & loc);
     ~Input();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
 };
 
 class Alloc : public Expr
@@ -159,6 +173,7 @@ public:
     Alloc(Expr * expr, const Loc & loc);
     ~Alloc();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     Expr * m_expr;
 };
 
@@ -169,6 +184,7 @@ public:
     VarRef(Identifier * id, const Loc & loc);
     ~VarRef();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     Identifier * m_id;
 };
 
@@ -178,6 +194,7 @@ public:
     Deref(Expr * pointer, const Loc & loc);
     ~Deref();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     Expr * m_pointer;
 };
 
@@ -187,6 +204,7 @@ public:
     RecordField(const string & name, Expr * expr, const Loc & loc);
     ~RecordField();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     string m_name;
     Expr * m_expr;
 };
@@ -197,6 +215,7 @@ public:
     Record(const vector<RecordField*> & fields,const Loc & loc);
     ~Record();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     vector<RecordField*> m_fields;
 };
 
@@ -207,6 +226,7 @@ public:
     FieldAccess(Expr * record, const string & field, const Loc & loc);
     ~FieldAccess();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     Expr * m_record;
     string m_field;
 };
@@ -217,6 +237,7 @@ public:
     AssignStmt(Expr * left, Expr * right, const Loc & loc);
     ~AssignStmt();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     Expr * m_left;
     Expr * m_right;
 };
@@ -228,6 +249,7 @@ public:
     Block(const Loc & loc);
     virtual ~Block() = default;
     virtual  Object * Accept(Visitor & v) = 0;
+    virtual shared_ptr<Type> Accept(VisitorType & v) = 0;
 };
 
 
@@ -237,6 +259,7 @@ public:
     NestedBlockStmt(const vector<StmtInNestedBlock*> & body, const Loc & loc);
     ~NestedBlockStmt();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     vector<StmtInNestedBlock*> m_body;
 };
 
@@ -247,6 +270,7 @@ public:
     IdentifierDecl(const string & name, const Loc & loc);
     ~IdentifierDecl();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
 };
 
 class VarStmt : public Stmt
@@ -255,6 +279,7 @@ public:
     VarStmt(const vector<IdentifierDecl*> & decls, const Loc & loc);
     ~VarStmt();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     vector<IdentifierDecl*> m_decls;
 };
 
@@ -265,6 +290,7 @@ public:
     ReturnStmt(Expr * expr, const Loc & loc);
     ~ReturnStmt();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     Expr * m_expr;
 };
 
@@ -276,6 +302,7 @@ public:
                  ReturnStmt * ret,const Loc & loc);
     ~FunBlockStmt();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     vector<VarStmt*> m_vars;
     vector<StmtInNestedBlock*> m_stmts;
     ReturnStmt * m_ret;
@@ -288,6 +315,7 @@ public:
            NestedBlockStmt * elseBranch,const Loc & loc);
     ~IfStmt();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     Expr * m_guard;
     NestedBlockStmt * m_thenBranch;
     NestedBlockStmt * m_elseBranch;
@@ -299,6 +327,7 @@ public:
     WhileStmt(Expr * guard, NestedBlockStmt * block, const Loc & loc);
     ~WhileStmt();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     Expr * m_guard;
     NestedBlockStmt * m_block;
 };
@@ -309,6 +338,7 @@ public:
     OutputStmt(Expr * expr, const Loc & loc);
     ~OutputStmt();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     Expr * m_expr;
 };
 
@@ -320,6 +350,7 @@ public:
             const string & name, const Loc & loc);
     ~FunDecl();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     vector<IdentifierDecl*> m_params;
     FunBlockStmt * m_block;
 };
@@ -330,6 +361,7 @@ public:
     Program(vector<FunDecl*> & funs,const Loc & loc);
     ~Program();
     Object * Accept(Visitor & v);
+    shared_ptr<Type> Accept(VisitorType & v);
     vector<FunDecl*> m_funs;
 };
 

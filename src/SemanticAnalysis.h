@@ -5,6 +5,7 @@
 #include "Visitor.h"
 #include "AST.h"
 #include <unordered_map>
+#include <set>
 
 
 using namespace std;
@@ -31,6 +32,7 @@ class SemanticAnalysis : public Visitor
 {
     public:
         SemanticAnalysis();
+        set<string> & GetAllFields();
         Object * visit ( Number * integer);
         Object * visit ( Null * null);
         Object * visit ( Identifier * id);
@@ -56,6 +58,7 @@ class SemanticAnalysis : public Visitor
         Object * visit ( Program * Program);
         unordered_map<string,FunDecl*> m_fun;
         unordered_map<string,IdentifierDecl*> m_var;
+        set<string> m_allFields;
 
 };
 
