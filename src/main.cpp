@@ -24,7 +24,7 @@ int main(int argc, char** argv)
     }
     else if (argc == 4)
     {
-        if (argv[2][0] == '0')
+        if (argv[3][0] == '0')
             ascii = true;
     }
 
