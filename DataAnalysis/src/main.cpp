@@ -5,6 +5,8 @@
 #include "JSONToAST.h"
 #include "AST.h"
 #include "Normalization.hpp"
+#include "ASTToCFG.h"
+#include "CFG.h"
 
 using namespace std;
 
@@ -29,13 +31,24 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    Normalization normal;
-    Program * now = normal.visit(program);
+
+//    Normalization normal;
+//    Program * now = normal.visit(program);
+//    delete program;
+//    program = now;
+
+
+    ASTToCFG cfg;
+    cfg.CreateCFG(program);
+    vector<CFGNode*> & code = cfg.GetVectorNodes();
 
     ostream & os = cout;
-    now->PrintOut(os);
 
-    delete now;
+    for (auto & x : code)
+        x->PrintOut(os);
+
+//    now->PrintOut(os);
+
     delete program;
     return 0;
 }
