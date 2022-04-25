@@ -222,11 +222,29 @@ FunBlockStmt * JSONToAST::JSONFunBlockStmt(json & j)
 IfStmt * JSONToAST::JSONIfStmt(json & j)
 {
     Expr * expr = convertExpr(j["guard"]);
-    NestedBlockStmt * stmtThen = JSONNestedBlockStmt(j["thenBranch"]["NestedBlockStmt"]);
+    json jj = j["thenBranch"];
+    NestedBlockStmt * stmtThen;
+    if (jj.begin().key() != "NestedBlockStmt"){
+        vector<StmtInNestedBlock*> body;
+        body.push_back(convertStmtInNestedBlock(jj));
+        stmtThen = new NestedBlockStmt(body,JSONLoc(jj.begin().value()["loc"]));
+    }
+    else{
+        stmtThen = JSONNestedBlockStmt(j["thenBranch"]["NestedBlockStmt"]);
+    }
     json js = j["elseBranch"];
     NestedBlockStmt * stmtElse = nullptr;
     if (js.begin().key() != "None")
-        stmtElse = JSONNestedBlockStmt(js["Some"]["value"]["NestedBlockStmt"]);
+    {
+        json jj = js["Some"]["value"];
+        if (jj.begin().key() != "NestedBlockStmt"){
+            vector<StmtInNestedBlock*> body;
+            body.push_back(convertStmtInNestedBlock(jj));
+            stmtElse = new NestedBlockStmt(body,JSONLoc(jj.begin().value()["loc"]));
+        }
+        else 
+            stmtElse = JSONNestedBlockStmt(js["Some"]["value"]["NestedBlockStmt"]);
+    }
 
     return new IfStmt(expr,stmtThen,stmtElse,JSONLoc(j["loc"]));
 }

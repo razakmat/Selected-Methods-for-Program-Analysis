@@ -12,6 +12,9 @@ CFGNode * ASTToCFG::CreateCFG(Program * program)
     m_nodes.push_back(start);
     m_prev.push_back(start);
 
+    for (auto & x: fun->m_params)
+        m_names.push_back(x->m_name);
+
     CreateVars(fun->m_block);
     CreateStmts(fun->m_block->m_stmts);
     CreateReturnAndEnd(fun->m_block->m_ret,fun->m_name);
@@ -24,6 +27,11 @@ vector<CFGNode*> & ASTToCFG::GetVectorNodes()
     return m_nodes;
 }
 
+vector<string> & ASTToCFG::GetVectorNames()
+{
+    return m_names;
+}
+
 
 void ASTToCFG::CreateVars(FunBlockStmt * funBlock)
 {
@@ -33,6 +41,9 @@ void ASTToCFG::CreateVars(FunBlockStmt * funBlock)
         m_nodes.push_back(vars);
         WritePrev(vars);
         m_prev.push_back(vars);
+
+        for (auto & y : x->m_decls)
+            m_names.push_back(y->m_name);
     }
 }
 

@@ -1,0 +1,173 @@
+{
+  "Program": {
+    "funs": [
+      {
+        "FunDecl": {
+          "name": "foo",
+          "params": [
+            {
+              "IdentifierDecl": {
+                "name": "x",
+                "loc": {
+                  "Loc": {
+                    "line": "1",
+                    "col": "5"
+                  }
+                }
+              }
+            },
+            {
+              "IdentifierDecl": {
+                "name": "y",
+                "loc": {
+                  "Loc": {
+                    "line": "1",
+                    "col": "8"
+                  }
+                }
+              }
+            }
+          ],
+          "block": {
+            "FunBlockStmt": {
+              "vars": [],
+              "stmts": [
+                {
+                  "AssignStmt": {
+                    "left": {
+                      "Deref": {
+                        "pointer": {
+                          "Deref": {
+                            "pointer": {
+                              "Identifier": {
+                                "name": "x",
+                                "loc": {
+                                  "Loc": {
+                                    "line": "2",
+                                    "col": "5"
+                                  }
+                                }
+                              }
+                            },
+                            "loc": {
+                              "Loc": {
+                                "line": "2",
+                                "col": "4"
+                              }
+                            }
+                          }
+                        },
+                        "loc": {
+                          "Loc": {
+                            "line": "2",
+                            "col": "3"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "Deref": {
+                        "pointer": {
+                          "Deref": {
+                            "pointer": {
+                              "Identifier": {
+                                "name": "y",
+                                "loc": {
+                                  "Loc": {
+                                    "line": "2",
+                                    "col": "11"
+                                  }
+                                }
+                              }
+                            },
+                            "loc": {
+                              "Loc": {
+                                "line": "2",
+                                "col": "10"
+                              }
+                            }
+                          }
+                        },
+                        "loc": {
+                          "Loc": {
+                            "line": "2",
+                            "col": "9"
+                          }
+                        }
+                      }
+                    },
+                    "loc": {
+                      "Loc": {
+                        "line": "2",
+                        "col": "7"
+                      }
+                    }
+                  }
+                }
+              ],
+              "ret": {
+                "ReturnStmt": {
+                  "expr": {
+                    "Deref": {
+                      "pointer": {
+                        "Deref": {
+                          "pointer": {
+                            "Identifier": {
+                              "name": "x",
+                              "loc": {
+                                "Loc": {
+                                  "line": "3",
+                                  "col": "12"
+                                }
+                              }
+                            }
+                          },
+                          "loc": {
+                            "Loc": {
+                              "line": "3",
+                              "col": "11"
+                            }
+                          }
+                        }
+                      },
+                      "loc": {
+                        "Loc": {
+                          "line": "3",
+                          "col": "10"
+                        }
+                      }
+                    }
+                  },
+                  "loc": {
+                    "Loc": {
+                      "line": "3",
+                      "col": "3"
+                    }
+                  }
+                }
+              },
+              "loc": {
+                "Loc": {
+                  "line": "1",
+                  "col": "11"
+                }
+              }
+            }
+          },
+          "loc": {
+            "Loc": {
+              "line": "1",
+              "col": "1"
+            }
+          }
+        }
+      }
+    ],
+    "loc": {
+      "Loc": {
+        "line": "1",
+        "col": "1"
+      }
+    }
+  }
+}

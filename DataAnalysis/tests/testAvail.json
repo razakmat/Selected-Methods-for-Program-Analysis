@@ -1,0 +1,431 @@
+{
+  "Program": {
+    "funs": [
+      {
+        "FunDecl": {
+          "name": "main",
+          "params": [],
+          "block": {
+            "FunBlockStmt": {
+              "vars": [
+                {
+                  "VarStmt": {
+                    "decls": [
+                      {
+                        "IdentifierDecl": {
+                          "name": "x",
+                          "loc": {
+                            "Loc": {
+                              "line": "3",
+                              "col": "5"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "IdentifierDecl": {
+                          "name": "y",
+                          "loc": {
+                            "Loc": {
+                              "line": "3",
+                              "col": "7"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "IdentifierDecl": {
+                          "name": "z",
+                          "loc": {
+                            "Loc": {
+                              "line": "3",
+                              "col": "9"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "IdentifierDecl": {
+                          "name": "a",
+                          "loc": {
+                            "Loc": {
+                              "line": "3",
+                              "col": "11"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "IdentifierDecl": {
+                          "name": "b",
+                          "loc": {
+                            "Loc": {
+                              "line": "3",
+                              "col": "13"
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "loc": {
+                      "Loc": {
+                        "line": "3",
+                        "col": "1"
+                      }
+                    }
+                  }
+                }
+              ],
+              "stmts": [
+                {
+                  "AssignStmt": {
+                    "left": {
+                      "Identifier": {
+                        "name": "z",
+                        "loc": {
+                          "Loc": {
+                            "line": "4",
+                            "col": "1"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "BinaryOp": {
+                        "operator": {
+                          "Plus": {}
+                        },
+                        "left": {
+                          "Identifier": {
+                            "name": "a",
+                            "loc": {
+                              "Loc": {
+                                "line": "4",
+                                "col": "5"
+                              }
+                            }
+                          }
+                        },
+                        "right": {
+                          "Identifier": {
+                            "name": "b",
+                            "loc": {
+                              "Loc": {
+                                "line": "4",
+                                "col": "7"
+                              }
+                            }
+                          }
+                        },
+                        "loc": {
+                          "Loc": {
+                            "line": "4",
+                            "col": "6"
+                          }
+                        }
+                      }
+                    },
+                    "loc": {
+                      "Loc": {
+                        "line": "4",
+                        "col": "3"
+                      }
+                    }
+                  }
+                },
+                {
+                  "AssignStmt": {
+                    "left": {
+                      "Identifier": {
+                        "name": "y",
+                        "loc": {
+                          "Loc": {
+                            "line": "5",
+                            "col": "1"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "BinaryOp": {
+                        "operator": {
+                          "Times": {}
+                        },
+                        "left": {
+                          "Identifier": {
+                            "name": "a",
+                            "loc": {
+                              "Loc": {
+                                "line": "5",
+                                "col": "5"
+                              }
+                            }
+                          }
+                        },
+                        "right": {
+                          "Identifier": {
+                            "name": "b",
+                            "loc": {
+                              "Loc": {
+                                "line": "5",
+                                "col": "7"
+                              }
+                            }
+                          }
+                        },
+                        "loc": {
+                          "Loc": {
+                            "line": "5",
+                            "col": "6"
+                          }
+                        }
+                      }
+                    },
+                    "loc": {
+                      "Loc": {
+                        "line": "5",
+                        "col": "3"
+                      }
+                    }
+                  }
+                },
+                {
+                  "WhileStmt": {
+                    "guard": {
+                      "BinaryOp": {
+                        "operator": {
+                          "GreatThan": {}
+                        },
+                        "left": {
+                          "Identifier": {
+                            "name": "y",
+                            "loc": {
+                              "Loc": {
+                                "line": "6",
+                                "col": "8"
+                              }
+                            }
+                          }
+                        },
+                        "right": {
+                          "BinaryOp": {
+                            "operator": {
+                              "Plus": {}
+                            },
+                            "left": {
+                              "Identifier": {
+                                "name": "a",
+                                "loc": {
+                                  "Loc": {
+                                    "line": "6",
+                                    "col": "12"
+                                  }
+                                }
+                              }
+                            },
+                            "right": {
+                              "Identifier": {
+                                "name": "b",
+                                "loc": {
+                                  "Loc": {
+                                    "line": "6",
+                                    "col": "14"
+                                  }
+                                }
+                              }
+                            },
+                            "loc": {
+                              "Loc": {
+                                "line": "6",
+                                "col": "13"
+                              }
+                            }
+                          }
+                        },
+                        "loc": {
+                          "Loc": {
+                            "line": "6",
+                            "col": "10"
+                          }
+                        }
+                      }
+                    },
+                    "block": {
+                      "NestedBlockStmt": {
+                        "body": [
+                          {
+                            "AssignStmt": {
+                              "left": {
+                                "Identifier": {
+                                  "name": "a",
+                                  "loc": {
+                                    "Loc": {
+                                      "line": "7",
+                                      "col": "1"
+                                    }
+                                  }
+                                }
+                              },
+                              "right": {
+                                "BinaryOp": {
+                                  "operator": {
+                                    "Plus": {}
+                                  },
+                                  "left": {
+                                    "Identifier": {
+                                      "name": "a",
+                                      "loc": {
+                                        "Loc": {
+                                          "line": "7",
+                                          "col": "5"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "right": {
+                                    "Number": {
+                                      "value": "1",
+                                      "loc": {
+                                        "Loc": {
+                                          "line": "7",
+                                          "col": "7"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "loc": {
+                                    "Loc": {
+                                      "line": "7",
+                                      "col": "6"
+                                    }
+                                  }
+                                }
+                              },
+                              "loc": {
+                                "Loc": {
+                                  "line": "7",
+                                  "col": "3"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "AssignStmt": {
+                              "left": {
+                                "Identifier": {
+                                  "name": "x",
+                                  "loc": {
+                                    "Loc": {
+                                      "line": "8",
+                                      "col": "1"
+                                    }
+                                  }
+                                }
+                              },
+                              "right": {
+                                "BinaryOp": {
+                                  "operator": {
+                                    "Plus": {}
+                                  },
+                                  "left": {
+                                    "Identifier": {
+                                      "name": "a",
+                                      "loc": {
+                                        "Loc": {
+                                          "line": "8",
+                                          "col": "5"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "right": {
+                                    "Identifier": {
+                                      "name": "b",
+                                      "loc": {
+                                        "Loc": {
+                                          "line": "8",
+                                          "col": "7"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "loc": {
+                                    "Loc": {
+                                      "line": "8",
+                                      "col": "6"
+                                    }
+                                  }
+                                }
+                              },
+                              "loc": {
+                                "Loc": {
+                                  "line": "8",
+                                  "col": "3"
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "loc": {
+                          "Loc": {
+                            "line": "6",
+                            "col": "17"
+                          }
+                        }
+                      }
+                    },
+                    "loc": {
+                      "Loc": {
+                        "line": "6",
+                        "col": "1"
+                      }
+                    }
+                  }
+                }
+              ],
+              "ret": {
+                "ReturnStmt": {
+                  "expr": {
+                    "Number": {
+                      "value": "0",
+                      "loc": {
+                        "Loc": {
+                          "line": "10",
+                          "col": "9"
+                        }
+                      }
+                    }
+                  },
+                  "loc": {
+                    "Loc": {
+                      "line": "10",
+                      "col": "2"
+                    }
+                  }
+                }
+              },
+              "loc": {
+                "Loc": {
+                  "line": "1",
+                  "col": "8"
+                }
+              }
+            }
+          },
+          "loc": {
+            "Loc": {
+              "line": "1",
+              "col": "1"
+            }
+          }
+        }
+      }
+    ],
+    "loc": {
+      "Loc": {
+        "line": "1",
+        "col": "1"
+      }
+    }
+  }
+}

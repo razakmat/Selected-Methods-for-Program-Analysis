@@ -15,8 +15,10 @@ class CFGNode
         vector<CFGNode*> m_prev;
         vector<CFGNode*> m_succ;
         int m_nodeNumber;
+        string m_analysis;
     protected:
         void PrintOutSucc(ostream & os);
+        void PrintOutAnalysis(ostream & os);
 };
 
 

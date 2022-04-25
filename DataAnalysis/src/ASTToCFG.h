@@ -3,6 +3,7 @@
 
 #include "AST.h"
 #include "CFG.h"
+#include <string>
 using namespace std;
 
 class ASTToCFG
@@ -10,6 +11,7 @@ class ASTToCFG
     public:
         CFGNode * CreateCFG(Program * AST);
         vector<CFGNode*> & GetVectorNodes();
+        vector<string> & GetVectorNames();
     protected:
         void CreateVars(FunBlockStmt * funBlock);
         void CreateStmts(vector<StmtInNestedBlock*> & block);
@@ -19,6 +21,7 @@ class ASTToCFG
         vector<CFGNode*> m_prev;
         int m_counter = 0;
         vector<CFGNode*> m_nodes;
+        vector<string> m_names;
 };
 
 

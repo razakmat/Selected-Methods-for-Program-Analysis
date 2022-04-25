@@ -107,11 +107,13 @@ BinaryOp * BinaryOp::Accept(Visitor & v)
 
 void BinaryOp::PrintOut(ostream & os) 
 {
+    os << "(";
     m_left->PrintOut(os);
     os << " ";
     m_operator->PrintOut(os);
     os << " ";
     m_right->PrintOut(os);
+    os << ")";
 }
 
 int Plus::Apply(int left, int right)

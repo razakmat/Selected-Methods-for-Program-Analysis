@@ -19,6 +19,7 @@ compile: ./src/main.o ./src/AST.o ./src/JSONToAST.o ./src/Interpreter.o ./src/Me
 ./src/Type.o: ./src/Type.cpp ./src/AST.h
 ./src/Unification.o: ./src/Unification.cpp ./src/TypeException.h ./src/Type.h
 ./src/TypeAnalysis.o: ./src/TypeAnalysis.cpp ./src/TypeException.h ./src/VisitorType.h ./src/Type.h ./src/Unification.h ./src/AST.h
+
 clean:	
 	rm ./src/*.o 
 	rm APR

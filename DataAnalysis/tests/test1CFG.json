@@ -1,0 +1,237 @@
+{
+  "Program": {
+    "funs": [
+      {
+        "FunDecl": {
+          "name": "foo",
+          "params": [
+            {
+              "IdentifierDecl": {
+                "name": "f",
+                "loc": {
+                  "Loc": {
+                    "line": "1",
+                    "col": "5"
+                  }
+                }
+              }
+            },
+            {
+              "IdentifierDecl": {
+                "name": "g",
+                "loc": {
+                  "Loc": {
+                    "line": "1",
+                    "col": "8"
+                  }
+                }
+              }
+            },
+            {
+              "IdentifierDecl": {
+                "name": "h",
+                "loc": {
+                  "Loc": {
+                    "line": "1",
+                    "col": "11"
+                  }
+                }
+              }
+            }
+          ],
+          "block": {
+            "FunBlockStmt": {
+              "vars": [
+                {
+                  "VarStmt": {
+                    "decls": [
+                      {
+                        "IdentifierDecl": {
+                          "name": "x",
+                          "loc": {
+                            "Loc": {
+                              "line": "2",
+                              "col": "7"
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "loc": {
+                      "Loc": {
+                        "line": "2",
+                        "col": "3"
+                      }
+                    }
+                  }
+                }
+              ],
+              "stmts": [
+                {
+                  "AssignStmt": {
+                    "left": {
+                      "Identifier": {
+                        "name": "x",
+                        "loc": {
+                          "Loc": {
+                            "line": "3",
+                            "col": "3"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "CallFuncExpr": {
+                        "targetFun": {
+                          "Deref": {
+                            "pointer": {
+                              "Deref": {
+                                "pointer": {
+                                  "Identifier": {
+                                    "name": "f",
+                                    "loc": {
+                                      "Loc": {
+                                        "line": "3",
+                                        "col": "10"
+                                      }
+                                    }
+                                  }
+                                },
+                                "loc": {
+                                  "Loc": {
+                                    "line": "3",
+                                    "col": "9"
+                                  }
+                                }
+                              }
+                            },
+                            "loc": {
+                              "Loc": {
+                                "line": "3",
+                                "col": "8"
+                              }
+                            }
+                          }
+                        },
+                        "args": [
+                          {
+                            "BinaryOp": {
+                              "operator": {
+                                "Plus": {}
+                              },
+                              "left": {
+                                "CallFuncExpr": {
+                                  "targetFun": {
+                                    "Identifier": {
+                                      "name": "g",
+                                      "loc": {
+                                        "Loc": {
+                                          "line": "3",
+                                          "col": "13"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "args": [],
+                                  "loc": {
+                                    "Loc": {
+                                      "line": "3",
+                                      "col": "14"
+                                    }
+                                  }
+                                }
+                              },
+                              "right": {
+                                "CallFuncExpr": {
+                                  "targetFun": {
+                                    "Identifier": {
+                                      "name": "h",
+                                      "loc": {
+                                        "Loc": {
+                                          "line": "3",
+                                          "col": "19"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "args": [],
+                                  "loc": {
+                                    "Loc": {
+                                      "line": "3",
+                                      "col": "20"
+                                    }
+                                  }
+                                }
+                              },
+                              "loc": {
+                                "Loc": {
+                                  "line": "3",
+                                  "col": "17"
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "loc": {
+                          "Loc": {
+                            "line": "3",
+                            "col": "12"
+                          }
+                        }
+                      }
+                    },
+                    "loc": {
+                      "Loc": {
+                        "line": "3",
+                        "col": "5"
+                      }
+                    }
+                  }
+                }
+              ],
+              "ret": {
+                "ReturnStmt": {
+                  "expr": {
+                    "Identifier": {
+                      "name": "x",
+                      "loc": {
+                        "Loc": {
+                          "line": "4",
+                          "col": "10"
+                        }
+                      }
+                    }
+                  },
+                  "loc": {
+                    "Loc": {
+                      "line": "4",
+                      "col": "3"
+                    }
+                  }
+                }
+              },
+              "loc": {
+                "Loc": {
+                  "line": "1",
+                  "col": "14"
+                }
+              }
+            }
+          },
+          "loc": {
+            "Loc": {
+              "line": "1",
+              "col": "1"
+            }
+          }
+        }
+      }
+    ],
+    "loc": {
+      "Loc": {
+        "line": "1",
+        "col": "1"
+      }
+    }
+  }
+}

@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 void CFGAssign::PrintOut(ostream & os)
 {
     os << "n_" << to_string(m_nodeNumber);
@@ -11,6 +10,7 @@ void CFGAssign::PrintOut(ostream & os)
     os << " = ";
     m_right->PrintOut(os);
     os << ";";
+    PrintOutAnalysis(os);
     os << "\"]" << endl;
     PrintOutSucc(os);
 }
@@ -20,6 +20,7 @@ void CFGOutput::PrintOut(ostream & os)
     os << "n_" << to_string(m_nodeNumber);
     os << "[label=\"output ";
     m_right->PrintOut(os);
+    PrintOutAnalysis(os);
     os << "\"]" << endl;
     PrintOutSucc(os);
 }
@@ -29,7 +30,9 @@ void CFGReturn::PrintOut(ostream & os)
     os << "n_" << to_string(m_nodeNumber);
     os << "[label=\"return ";
     m_right->PrintOut(os);
-    os << ";\"]" << endl;
+    os << ";";
+    PrintOutAnalysis(os);
+    os << "\"]" << endl;
     PrintOutSucc(os);
 }
 
@@ -45,6 +48,7 @@ void CFGVar::PrintOut(ostream & os)
         else
             os << ";";
     }
+    PrintOutAnalysis(os);
     os << "\"]" << endl;
     PrintOutSucc(os);
 }
@@ -53,14 +57,18 @@ void CFGStart::PrintOut(ostream & os)
 {
     os << "digraph CFG {" << endl;
     os << "n_" << to_string(m_nodeNumber);
-    os << "[label=\"Fun " << m_funName << " entry\"]" << endl;
+    os << "[label=\"Fun " << m_funName << " entry";
+    PrintOutAnalysis(os);
+    os << "\"]" << endl;
     PrintOutSucc(os);
 }
 
 void CFGEnd::PrintOut(ostream & os)
 {
     os << "n_" << to_string(m_nodeNumber);
-    os << "[label=\"Fun " << m_funName << " exit\"]" << endl;
+    os << "[label=\"Fun " << m_funName << " exit";
+    PrintOutAnalysis(os);
+    os << "\"]" << endl;
     os << "}" << endl;
 }
 
@@ -69,8 +77,18 @@ void CFGExpr::PrintOut(ostream & os)
     os << "n_" << to_string(m_nodeNumber);
     os << "[label=\"";
     m_right->PrintOut(os);
+    PrintOutAnalysis(os);
     os << "\"]" << endl;
     PrintOutSucc(os);
+}
+
+void CFGNode::PrintOutAnalysis(ostream & os)
+{
+    if (!m_analysis.empty())
+    {
+        os << "\\n";
+        os << m_analysis;
+    }
 }
 
 
@@ -78,7 +96,7 @@ void CFGExpr::PrintOut(ostream & os)
 CFGNode::CFGNode(int num)
 : m_nodeNumber(num)
 {
-    
+    m_analysis.clear();
 }
 
 void CFGNode::PrintOutSucc(ostream & os)
@@ -87,6 +105,7 @@ void CFGNode::PrintOutSucc(ostream & os)
         os << "n_" << to_string(m_nodeNumber) << " -> " 
             << "n_" << to_string(x->m_nodeNumber) << endl;
 }
+
 
 CFGAssign::CFGAssign(Identifier * l,Expr * r, int num)
 : CFGNode(num), m_left(l),m_right(r)

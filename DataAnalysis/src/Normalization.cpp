@@ -104,8 +104,8 @@ Deref * Normalization::visit(Deref * deref)
 RecordField * Normalization::visit(RecordField * recordField) 
 {
     Expr * e = recordField->m_expr->Accept(*this);
-//    CheckAndCreateNewExpr(e);
-//    Not sure if recordFields should be only id
+    CheckAndCreateNewExpr(e);
+    m_SExp = false;
     return new RecordField(recordField->m_name,e,{0,m_col});
 }
 
@@ -131,8 +131,6 @@ FieldAccess * Normalization::visit(FieldAccess * fieldAccess)
 AssignStmt * Normalization::visit(AssignStmt * assignStmt) 
 {
     Expr * left = assignStmt->m_left->Accept(*this);
-    if (!dynamic_cast<Identifier*>(left))
-        CheckAndCreateNewExpr(left);
     Expr * right = assignStmt->m_right->Accept(*this);
     return new AssignStmt(left,right,{0,m_col});
 }
