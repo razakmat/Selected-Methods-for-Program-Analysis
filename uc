@@ -24,6 +24,16 @@ else
 	$SCRIPT_DIR/src/DataAnalysis/DataAnalysis $2.json "no" $1
 fi
 
+elif [ $1 = "Andersen" ]
+then
+	$SCRIPT_DIR/microc/uc export --indent 2 --output $2.json $2
+	$SCRIPT_DIR/src/Pointers/Pointers $2.json $1
+
+elif [ $1 = "Steensgaard" ]
+then
+	$SCRIPT_DIR/microc/uc export --indent 2 --output $2.json $2
+	$SCRIPT_DIR/src/Pointers/Pointers $2.json $1
+
 else
     echo "Unknown command: $1. Supported commands: run, type, cfg, sign, const, live, available, busy, reaching"
 fi

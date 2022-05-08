@@ -188,7 +188,8 @@ FunBlockStmt * Normalization::visit(FunBlockStmt * funBlockStmt)
         newIdent.push_back(new IdentifierDecl(x,{0,m_col}));
 
     vector<VarStmt*> vars;
-    vars.push_back(new VarStmt(newIdent,{0,m_col}));
+    if (!m_newVar.empty())
+        vars.push_back(new VarStmt(newIdent,{0,m_col}));
     for (auto & x : funBlockStmt->m_vars)
         vars.push_back(x->Accept(*this));
     m_col -= m_tab;

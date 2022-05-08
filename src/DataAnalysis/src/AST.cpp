@@ -107,13 +107,11 @@ BinaryOp * BinaryOp::Accept(Visitor & v)
 
 void BinaryOp::PrintOut(ostream & os) 
 {
-    os << "(";
     m_left->PrintOut(os);
     os << " ";
     m_operator->PrintOut(os);
     os << " ";
     m_right->PrintOut(os);
-    os << ")";
 }
 
 int Plus::Apply(int left, int right)
@@ -624,9 +622,8 @@ void FunDecl::PrintOut(ostream & os)
         x->PrintOut(os);
         if (x != m_params.back())
             os << ",";
-        else
-            os << ")";
     }
+    os << ")";
     os << endl;
     m_block->PrintOut(os);
 }
