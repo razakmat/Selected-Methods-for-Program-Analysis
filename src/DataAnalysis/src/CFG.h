@@ -21,6 +21,15 @@ class CFGNode
         void PrintOutAnalysis(ostream & os);
 };
 
+// for flow-sensitive pointer analysis
+class CFGAssignP : public CFGNode
+{
+    public:
+        CFGAssignP(Expr * l, Expr * r, int num);
+        virtual void PrintOut(ostream & os);
+        Expr * m_left;
+        Expr * m_right;
+};
 
 class CFGAssign : public CFGNode
 {

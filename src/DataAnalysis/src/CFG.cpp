@@ -15,6 +15,19 @@ void CFGAssign::PrintOut(ostream & os)
     PrintOutSucc(os);
 }
 
+void CFGAssignP::PrintOut(ostream & os)
+{
+    os << "n_" << to_string(m_nodeNumber);
+    os << "[label=\"";
+    m_left->PrintOut(os);
+    os << " = ";
+    m_right->PrintOut(os);
+    os << ";";
+    PrintOutAnalysis(os);
+    os << "\"]" << endl;
+    PrintOutSucc(os);
+}
+
 void CFGOutput::PrintOut(ostream & os)
 {
     os << "n_" << to_string(m_nodeNumber);
@@ -106,6 +119,11 @@ void CFGNode::PrintOutSucc(ostream & os)
             << "n_" << to_string(x->m_nodeNumber) << endl;
 }
 
+CFGAssignP::CFGAssignP(Expr * l,Expr * r, int num)
+: CFGNode(num), m_left(l),m_right(r)
+{
+    
+}
 
 CFGAssign::CFGAssign(Identifier * l,Expr * r, int num)
 : CFGNode(num), m_left(l),m_right(r)

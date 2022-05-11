@@ -11,4 +11,7 @@ Dataflow Analysis:
 	
 Points-to Analysis:
 	./uc ( Andersen | Steensgaard ) ./name_of_file.uc
-	
+
+// Null analysis by default uses Andersen analysis
+Null Analysis:
+	./uc Null [--Steensgaard] ./name_of_file.uc

@@ -59,12 +59,16 @@ void ASTToCFG::CreateStmt(StmtInNestedBlock * stmt)
 {
     if (AssignStmt * assign = dynamic_cast<AssignStmt*>(stmt))
     {
-        CFGAssign * node = new CFGAssign(dynamic_cast<Identifier*>(assign->m_left),
-                                        assign->m_right,m_counter++);
+        CFGNode * node;
+        if (Identifier * id = dynamic_cast<Identifier*>(assign->m_left))
+        {
+            node = new CFGAssign(id,assign->m_right,m_counter++);
+        }
+        else
+        {
+            node = new CFGAssignP(assign->m_left,assign->m_right,m_counter++);
+        }
         m_nodes.push_back(node);
-        if (node->m_left == nullptr)
-            throw "Error : Left side of assignment has to be identifier.";
-        node->m_right = assign->m_right;
         WritePrev(node);
         m_prev.push_back(node);
     }

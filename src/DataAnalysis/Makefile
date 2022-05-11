@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS= -std=c++17 -Wall -pedantic -Wno-long-long -g
+CXXFLAGS= -std=c++17 -Wall -pedantic -Wno-long-long -O3
 CXXLIBS=
 OBJECTS= ./obj/main.o ./obj/AST.o ./obj/JSONToAST.o ./obj/Normalization.o ./obj/ASTToCFG.o ./obj/CFG.o ./obj/SignLattice.o ./obj/SignAnalysis.o ./obj/ConstLattice.o ./obj/ConstAnalysis.o ./obj/LiveVarLattice.o ./obj/LiveVarAnalysis.o ./obj/AvailableExprAnalysis.o ./obj/AvailableExprLattice.o ./obj/VeryBusyExprAnalysis.o ./obj/ReachingDefAnalysis.o ./obj/ReachingDefLattice.o
 

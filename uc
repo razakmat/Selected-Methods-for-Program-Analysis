@@ -34,7 +34,18 @@ then
 	$SCRIPT_DIR/microc/uc export --indent 2 --output $2.json $2
 	$SCRIPT_DIR/src/Pointers/Pointers $2.json $1
 
+elif [ $1 = "Null" ]
+then
+if [ $2 = "Steensgaard" ]
+then
+	$SCRIPT_DIR/microc/uc export --indent 2 --output $3.json $3
+	$SCRIPT_DIR/src/Null/Null $3.json 1 
 else
-    echo "Unknown command: $1. Supported commands: run, type, cfg, sign, const, live, available, busy, reaching"
+	$SCRIPT_DIR/microc/uc export --indent 2 --output $2.json $2
+	$SCRIPT_DIR/src/Null/Null $2.json
+fi
+
+else
+    echo "Unknown command: $1. Supported commands: run, type, cfg, sign, const, live, available, busy, reaching, Andersen, Steensgaard, Null"
 fi
 

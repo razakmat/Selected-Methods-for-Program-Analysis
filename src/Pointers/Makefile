@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS= -std=c++17 -Wall -pedantic -Wno-long-long -g
+CXXFLAGS= -std=c++17 -Wall -pedantic -Wno-long-long -O3
 CXXLIBS=
 OBJECTS= ./obj/main.o ./obj/AST.o ./obj/JSONToAST.o ./obj/Normalization.o ./obj/ASTToCFG.o ./obj/CFG.o ./obj/Andersen.o ./obj/Steensgaard.o
 
