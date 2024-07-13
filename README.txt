@@ -1,3 +1,6 @@
+# NI-APR
+- Selected Methods for Program Analysis
+
 First build project by running ./build.sh
 
 Run interpreter:
